@@ -1,0 +1,300 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+@media screen and (min-width: 320px) {
+	html {
+	font-size: 21.33px
+	}
+	body {
+	font-size: 12px
+	}
+}
+@media screen and (min-width: 360px) {
+	html {
+	font-size: 24px
+	}
+	body {
+	font-size: 12px
+	}
+}
+@media screen and (min-width: 375px) {
+	html {
+	font-size: 25px
+	}
+	body {
+	font-size: 12px
+	}
+}
+@media screen and (min-width: 384px) {
+	html {
+	font-size: 25.6px
+	}
+	body {
+	font-size: 14px
+	}
+}
+@media screen and (min-width: 400px) {
+	html {
+	font-size: 26.67px
+	}
+	body {
+	font-size: 14px
+	}
+}
+@media screen and (min-width: 414px) {
+	html {
+	font-size: 27.6px
+	}
+	body {
+	font-size: 14px
+	}
+}
+@media screen and (min-width: 424px) {
+	html {
+	font-size: 28.27px
+	}
+	body {
+	font-size: 14px
+	}
+}
+@media screen and (min-width: 480px) {
+	html {
+	font-size: 32px
+	}
+	body {
+	font-size: 15.36px
+	}
+}
+@media screen and (min-width: 540px) {
+	html {
+	font-size: 36px
+	}
+	body {
+	font-size: 17.28px
+	}
+}
+@media screen and (min-width: 720px) {
+	html {
+	font-size: 48px
+	}
+	body {
+	font-size: 23.04px
+	}
+}
+@media screen and (min-width: 750px) {
+	html {
+	font-size: 50px
+	}
+	body {
+	font-size: 24px
+	}
+}
+
+html{ height: 100%;}
+body{ min-width: 320px; height: 100%; background: #000; position: relative;}
+
+*{  margin: 0; padding: 0; border: none; box-sizing: border-box;}
+
+a{ text-decoration: none; outline: none;}
+a:hover ,a:link ,a:active{ text-decoration: none; outline: none;}
+ul, li{ list-style: none;}
+h1, h2, h3, h4, h5, h6{ font-weight: normal;}
+i,em{ font-style: normal;}
+
+img{ border: none; outline: none; vertical-align: top;}
+
+input, textarea, button{ color: #111; border: none; background: none; outline: none;}
+input, textarea{ -webkit-appearance: none; appearance: none; border-radius: 0;}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder{ color: #aaa;}
+
+::-webkit-scrollbar{ width: 0; height: 0; display: none}
+
+
+.clr{ width: 100%; height: .5rem; background: #f5f5f9; overflow: hidden; clear: both;}
+.clr-small{ width: 100%; height: .25rem; background: #f5f5f9; overflow: hidden; clear: both;}
+
+.fl{ float: left!important;}
+.fr{ float: right!important;}
+.position-left{ left: 0!important;}
+.position-right{ right: 0!important;}
+.text-left{ text-align: left!important;}
+.text-right{ text-align: right!important;}
+
+.open-layer{ height: 100%; overflow: hidden;}
+
+.bg_white{ background: #fff;}
+
+
+
+/**********通用布局**********/
+/**************************/
+/******页头******/
+/*------主体------*/
+.header{ width: 100%; height: 1.8rem; color: #fff; background: linear-gradient(90deg, #27a6fa, #8e71f5); background: -webkit-linear-gradient(left, #27a6fa, #8e71f5); padding: 0 2rem; position: fixed; z-index: 999; left: 0; top: 0;}
+.header-no-back{ background: none!important;}
+
+.index-header{padding: 0 .3rem;}
+
+/*------右边按钮------*/
+.header. header-right{ width:3.8rem; height:1.8rem; position:absolute; right:0; top:0;}
+
+/*------栏目名字------*/
+.header .logo{ width: 100%; line-height: 1.8rem; font-size: .6rem; text-align: center; position: relative;}
+.header .logo-name{ width: 100%; line-height: 1.8rem; font-size: .6rem; text-align:left; position: relative;}
+
+
+/*------栏目名字带箭头------*/
+.header .logo span, .header .logo i{ height: 1.8rem; display: inline-block; vertical-align: top; position: relative;}
+
+.header-open-arrow{ margin-left: .2rem;}
+.header-open-arrow:after{ width: 0; height: 0; content: ''; border-left: .3rem solid transparent; border-right: .3rem solid transparent; border-top: .3rem solid #fff; display: block; position: absolute; left: 0; top: .77rem;}
+
+/*------返回按钮------*/
+.header .header-return{ width: 1.8rem; height: 1.8rem; background: url(../images/return.png) no-repeat center; background-size: .86rem auto; overflow: hidden; display: block; position: absolute; z-index: 1000; left: 0; top: 0;}
+.header .header-return a{ width: 100%; height: 100%; display: block;}
+
+/*------文字按钮------*/
+.header .header-btn{ position: absolute; top: 0;}
+.header .header-btn a{ line-height: 1.8rem; color: #fff; display: block; padding: 0 .5rem;}
+.header .header-btn a.header-button{ line-height: 1.06rem; color: #fff; background: rgba(255, 255, 255, .3); border-radius: .15rem; display: block; padding: 0 .3rem; margin: .37rem .2rem;}
+
+/*------设置按钮------*/
+.header .header-setting{ width: 1.8rem; height: 1.8rem; position: absolute; top: 0;}
+.header .header-setting a{ width: 100%; height: 100%;  background: url(../images/icon_setting.png) no-repeat center; background-size: .96rem auto; display: block; position: relative;}
+
+/*------扫码按钮------*/
+.header .header-scan{ width: 1.8rem; height: 1.8rem; position: absolute; top: 0;}
+.header .header-scan a{ width: 100%; height: 100%;  background: url(../images/icon_scan.png) no-repeat center; background-size: .9rem auto; display: block; position: relative;}
+
+.header .header-right-scan{ width: 1.8rem; height: 1.8rem; position: absolute; top: 0; right:1.2rem;}
+.header .header-right-scan a{ width: 100%; height: 100%;  background: url(../images/icon_scan.png) no-repeat center; background-size: .9rem auto; display: block; position: relative;}
+
+/*------二维码按钮------*/
+.header .header-qrcode{ width: 1.8rem; height: 1.8rem; position: absolute; right: 0; top: 0;}
+.header .header-qrcode a{ width: 100%; height: 100%; background: url(../images/icon_qrcode.png) no-repeat center; background-size: .86rem auto; display: block; position: relative;}
+
+/*------消息按钮------*/
+.header .header-msg{ width: 1.6rem; height: 1.8rem; position: absolute; top: 0;}
+.header .header-msg a{ width: 100%; height: 100%;  background: url(../images/icon_msg.png) no-repeat center; background-size: .92rem auto; display: block; position: relative;}
+.header .header-msg em{ width: .7rem; height: .7rem; line-height: .7rem; font-size: .45rem; color: #ff0036; text-align: center; background: #fff; border-radius: 50%; display: block; position: absolute; right: .1rem; top: .2rem;}
+
+/*------搜索------*/
+.header-search{ width: 100%; overflow: hidden; padding: .3rem 0;}
+.header-search-box, .header-search-btn{ width: 100%; height: 1.2rem; background: #fff; border-radius: .6rem; overflow: hidden; position: relative; padding:0 1.4rem;}
+.header-search-box:before{ width: 1.3rem; height: 1.2rem; content: ''; background: url(../images/icon_search.png) no-repeat center; background-size: .8rem auto; position: absolute; left: 0; top: 0;}
+
+.header-search-box input{ width: 100%; height: 100%; font-size: .56rem;}
+.header-search-box .search-clear{ width: 1.4rem; height: 1.2rem; background: url(../images/icon_clear.png) no-repeat center; background-size: .8rem auto; display: block; position: absolute; right: 0; top: 0; display: none;}
+
+
+.header .header-right-search{ width: 1.8rem; height: 1.8rem; position: absolute; top: 0; right:0;}
+.header .header-right-search a{ width: 100%; height: 100%;  background: url(../images/icon_search_white.png) no-repeat center; background-size: .9rem auto; display: block; position: relative;}
+
+/*------切换按钮------*/
+.header-switch{ width: 100%; height: 1.8rem; font-size: 0; text-align: center;}
+
+.header-switch span{ line-height: 1.12rem; font-size: .52rem; border: #fff .05rem solid; overflow: hidden; display: inline-block; padding: 0 1rem; margin: .3rem 0 0 -.05rem; vertical-align: middle;}
+.header-switch span:first-child{ border-radius: .16rem 0 0 .16rem;}
+.header-switch span:last-child{ border-radius: 0 .16rem .16rem 0;}
+
+.header-switch span.active{ color: #5887fb; background: #fff; border-color: #fff;}
+
+
+/******主体内容******/
+.container{ position: absolute; left: 0; top: 1.8rem; right: 0; padding-bottom: 2.1rem; transition:all 0.3s linear 0s; -webkit-transition:all 0.3s linear 0s; -o-transition:all 0.3s linear 0s;}
+
+.no-bottom{ bottom: 0!important; padding-bottom: 0;}
+.no-top{ top: 0!important;}
+
+
+
+/*------选择语言的框------*/
+.choose-lang{ width: 100%; height: 100%; background: none; position: fixed; left: 0; top: 0; display: none;z-index: 99;}
+
+.choose-lang .choose-lang-box{width: 2.4rem;background: rgba(0, 0, 0, 0.8);border-radius: .2rem;padding: .3rem .5rem;position: absolute;right: .5rem;top: 2.2rem;}
+.choose-lang .choose-lang-box:after{ content: ''; border-left: .2rem solid transparent; border-right: .2rem solid transparent; border-bottom: .2rem solid rgb(42, 41, 40); position: absolute; right: .5rem; top: -.2rem;}
+
+.choose-lang .choose-lang-box .choose-lang-btn{ width:100%; overflow: hidden; padding: .2rem 0;}
+.choose-lang .choose-lang-box .choose-lang-btn i, .login .language .choose-lang .choose-lang-btn span{;float: left}
+.choose-lang .choose-lang-box .choose-lang-btn span{ line-height: 1.2rem; font-size: .56rem; color: #fff; display: block; margin-left: .3rem;}
+
+/**********通用弹框**********/
+/**************************/
+/******主体******/
+.popup{ width: 100%; height: 100%; background: rgba(0,0,0,.5); overflow: hidden; position: fixed; top: 0; left: 0; z-index: 99999; display: none;}
+.popup-bg{ width: 100%; height: 100%; position: absolute; left: 0; top: 0; z-index: 1;}
+
+
+/******弹出框******/
+/*------主体------*/
+.popup-box{ width: 90%; background: #fff; border-radius: .4rem; box-shadow: #555 0 0 1rem; overflow: hidden; position: absolute; left: 5%; top: 3rem; z-index: 2;}
+.popup-box-title{ width: 100%; font-size: .6rem; color: #333; text-align: center; border-bottom: #e6e6ed .05rem solid; padding: .5rem; position: relative;}
+
+.popup-box-close{ width: 1.2rem; height: 1.2rem; content: ''; background: url("../images/icon_close_gray.png") no-repeat center; background-size: 1rem auto; position: absolute; right: .2rem; top: .3rem;}
+
+/*------内容框和滚动条样式------*/
+.popup-box-content{ width: 100%; max-height: 20rem; overflow-x: hidden; overflow-y: auto;}
+.popup-box-content::-webkit-scrollbar{ width: .35rem; display: block;}
+.popup-box-content::-webkit-scrollbar-track{ width: .35rem; background: #fff; border-radius: .16rem;}/*轨道*/
+.popup-box-content::-webkit-scrollbar-thumb{ height: 1rem; background: #ddd; border-radius: .16rem;}/*滚动块*/
+
+/*------按钮------*/
+.popup-submit{ width: 100%; border-top: #e6e6ed 1px solid; overflow: hidden;}
+.popup-submit button{ width: 100%; height:44px; font-size:.56rem; text-align: center; float: left;}
+.popup-submit .confirm-btn{ color: #5887fb;background:none;}
+.popup-submit .cancle-btn{ color: #999; border-right:#e6e6ed 1px solid;background:none;}
+.popup-submit.confirm button{width:48%;display:inline-block}
+
+
+/*------弹框的表单------*/
+.popup-box-content .form-widget{ padding: 0 .3rem 0rem .3rem;}
+.popup-box-content .form-control .text-input{ color: #5887fb;}
+.popup-box-content .form-control .trade-all{ right: 0; top: .35rem;}
+
+/*------弹框的文字------*/
+.popup-box-text{ width: 100%; overflow: hidden; padding: .5rem .7rem;}
+.popup-box-text p{ line-height: 1.8em; font-size: .56rem; color: #555;}
+
+.popup-close{ width: 1.1rem; height: 1.1rem; background: url(../images/icon_close.svg) no-repeat center; background-size: .5rem auto; background-color: #ddd; border-radius: 50%; display: block; position: absolute; right: .4rem; top: .28rem; z-index: 99;}
+
+
+
+/**********通用表单**********/
+/**************************/
+/******主体******/
+/*------外框------*/
+.form-widget{ width: 100%; overflow: hidden;}
+.form-box{ width: auto;}
+.form-list{ width: auto;}
+
+/**********通用表单（左右排列）**********/
+/*------表单主体------*/
+.form-group{ width: 100%; background: #fff; border-bottom: #f1f1f1 .05rem solid; display: table; position: relative;}
+.form-group:last-child{ border-bottom: none;}
+
+.form-label, .form-control{ height: 1.8rem; font-size: .56rem; display: table-cell; padding: 0 .3rem; position: relative; vertical-align: middle;}
+.form-label{ width: 3.6rem; color: #333;}
+.form-label i{ color: #f00;}
+
+.form-control span{ line-height: 1.8rem; font-size: .56rem; color: #555; display: inline-block; vertical-align: middle;}
+
+/*------按钮式单选------*/
+.option-group{ width: 3.6rem; height: 1.8rem; position: relative; float: left;}
+.option-group input{ width: 100%; height: 100%; -webkit-appearance: none; appearance: none; position: absolute; z-index: 2; left: 0; top: 0;}
+.option-group span{ width: 100%; height: 1.24rem; line-height: 1.16rem; font-size: .52rem; color: #999; text-align: center; border: #eaeaea .05rem solid; border-right: none; display: block; position: absolute; left: 0; top: .28rem; z-index: 1; margin: 0;}
+
+.option-group input:checked+span{ color: #fff; border: #5887fb .05rem solid; background: #5887fb; background-size: .5rem auto;}
+.option-group input:checked+span:after{ width: 1rem; height: 1rem; content: ''; background: url(../images/icon_check_white.png) no-repeat center; background-size: .5rem auto; position: absolute; right: 0; top: .1rem;}
+
+.option-group:first-child span{ border-radius: .2rem 0 0 .2rem;}
+.option-group:last-child span{ border-right: #eaeaea .05rem solid; border-radius: 0 .2rem .2rem 0;}
+
+
+/*------按钮式单选------*/
+.option-box{ width: 3.4rem; height: 1.8rem; position: relative; float: left; margin:0rem .2rem 0rem 0rem;}
+.option-box input{ width: 100%; height: 100%; -webkit-appearance: none; appearance: none; position: absolute; z-index: 2; left: 0; top: 0;}
+.option-box span{ width: 100%; height: 1.24rem; line-height: 1.16rem; font-size: .52rem; color: #999; text-align: center; border: #eaeaea .05rem solid; border-radius:.1rem; display: block; position: absolute; left: 0; top: .28rem; z-index: 1; margin: 0;}
+
+.option-box input:checked+span{ color: #333; border: #5887fb .05rem solid; background-size: .5rem auto;}
+.option-box input:checked+span:after{ width: .6rem; height: .5rem; content: ''; background: url(../images/icon_check_white.png) no-repeat top right; background-color:#5887fb; background-size: .4rem auto; border-radius: 0rem 0rem 0rem 1rem; position: absolute; right: 0; top: -.05rem;}
+
