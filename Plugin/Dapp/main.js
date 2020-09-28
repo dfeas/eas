@@ -406,19 +406,28 @@ function Token_approve(cb, receiptCB, amount, spender, taddr, tABI, decimals) {
                 console.log(rdata)
                 //回调处理
                 typeof cb === "function" && cb(true, rdata)
+
+                //监听到账
+                _DappContractPlugin.DappBaseObj.checkTransactionReceipt(rdata, function (receipt) {
+                    console.log(receipt);
+                    //完成回调
+                    typeof receiptCB === "function" && receiptCB(receipt)
+                })
             })
             .on('error', function (err) {
                 console.log(err)
-                typeof cb === "function" && cb(false, err)
+                if (err && err.code) {
+                    typeof cb === "function" && cb(false, err)
+                }
             })
-            .on('confirmation', function (confirmationNumber, receipt) {
-                console.log('confirmation: ' + confirmationNumber);
-            })
-            .on('receipt', function (receipt) {
-                console.log(receipt);
-                //完成回调
-                typeof receiptCB === "function" && receiptCB(receipt)
-            });
+            //.on('confirmation', function (confirmationNumber, receipt) {
+            //    console.log('confirmation: ' + confirmationNumber);
+            //})
+            //.on('receipt', function (receipt) {
+            //    console.log(receipt);
+            //    //完成回调
+            //    typeof receiptCB === "function" && receiptCB(receipt)
+            //});
         }, taddr, tABI);
     } catch (e) {
         console.log(e)
@@ -497,23 +506,36 @@ function Dapp_settlement(cb) {
                 //回调处理
                 HandleShowTransactionProcessingLoad && HandleShowTransactionProcessingLoad(false);
                 typeof cb === "function" && cb(true, rdata);
+
+                //监听到账
+                _DappContractPlugin.DappBaseObj.checkTransactionReceipt(rdata, function (receipt) {
+                    console.log(receipt);
+                    //完成回调
+                    //完成刷新会员信息
+                    //直接调用账户变更事件进行更新页面数据
+                    _DappContractPlugin.getNetworkType(function (networkType) {
+                        _DappContractPlugin.DappBaseObj._networkChangedEvent(networkType);
+                    })
+                })
             })
             .on('error', function (err) {
                 console.log(err);
-                HandleShowTransactionProcessingLoad && HandleShowTransactionProcessingLoad(false);
-                typeof cb === "function" && cb(false, err);
+                if (err && err.code) {
+                    HandleShowTransactionProcessingLoad && HandleShowTransactionProcessingLoad(false);
+                    typeof cb === "function" && cb(false, err);
+                }
             })
-            .on('confirmation', function (confirmationNumber, receipt) {
-                console.log('confirmation: ' + confirmationNumber);
-            })
-            .on('receipt', function (receipt) {
-                console.log(receipt);
-                //完成刷新会员信息
-                //直接调用账户变更事件进行更新页面数据
-                _DappContractPlugin.getNetworkType(function (networkType) {
-                    _DappContractPlugin.DappBaseObj._networkChangedEvent(networkType);
-                })
-            });
+            //.on('confirmation', function (confirmationNumber, receipt) {
+            //    console.log('confirmation: ' + confirmationNumber);
+            //})
+            //.on('receipt', function (receipt) {
+            //    console.log(receipt);
+            //    //完成刷新会员信息
+            //    //直接调用账户变更事件进行更新页面数据
+            //    _DappContractPlugin.getNetworkType(function (networkType) {
+            //        _DappContractPlugin.DappBaseObj._networkChangedEvent(networkType);
+            //    })
+            //});
     } catch (e) {
         console.log(e);
         HandleShowTransactionProcessingLoad && HandleShowTransactionProcessingLoad(false);
@@ -556,23 +578,36 @@ function Dapp_invest(money, code, rCode, cb) {
                     //回调处理
                     HandleShowTransactionProcessingLoad && HandleShowTransactionProcessingLoad(false);
                     typeof cb === "function" && cb(true, rdata);
+
+                    //监听到账
+                    _DappContractPlugin.DappBaseObj.checkTransactionReceipt(rdata, function (receipt) {
+                        console.log(receipt);
+                        //完成回调
+                        //完成刷新会员信息
+                        //直接调用账户变更事件进行更新页面数据
+                        _DappContractPlugin.getNetworkType(function (networkType) {
+                            _DappContractPlugin.DappBaseObj._networkChangedEvent(networkType);
+                        })
+                    })
                 })
                 .on('error', function (err) {
                     console.log(err);
-                    HandleShowTransactionProcessingLoad && HandleShowTransactionProcessingLoad(false);
-                    typeof cb === "function" && cb(false, err);
+                    if (err && err.code) {
+                        HandleShowTransactionProcessingLoad && HandleShowTransactionProcessingLoad(false);
+                        typeof cb === "function" && cb(false, err);
+                    }
                 })
-                .on('confirmation', function (confirmationNumber, receipt) {
-                    console.log('confirmation: ' + confirmationNumber);
-                })
-                .on('receipt', function (receipt) {
-                    console.log(receipt);
-                    //完成刷新会员信息
-                    //直接调用账户变更事件进行更新页面数据
-                    _DappContractPlugin.getNetworkType(function (networkType) {
-                        _DappContractPlugin.DappBaseObj._networkChangedEvent(networkType);
-                    })
-                });
+                //.on('confirmation', function (confirmationNumber, receipt) {
+                //    console.log('confirmation: ' + confirmationNumber);
+                //})
+                //.on('receipt', function (receipt) {
+                //    console.log(receipt);
+                //    //完成刷新会员信息
+                //    //直接调用账户变更事件进行更新页面数据
+                //    _DappContractPlugin.getNetworkType(function (networkType) {
+                //        _DappContractPlugin.DappBaseObj._networkChangedEvent(networkType);
+                //    })
+                //});
         })
     } catch (e) {
         console.log(e);
@@ -593,31 +628,44 @@ function Dapp_takeBonus(_type, cb) {
                 //回调处理
                 HandleShowTransactionProcessingLoad && HandleShowTransactionProcessingLoad(false)
                 typeof cb === "function" && cb(true, rdata)
+
+                //监听到账
+                _DappContractPlugin.DappBaseObj.checkTransactionReceipt(rdata, function (receipt) {
+                    console.log(receipt);
+                    //完成回调
+                    //完成刷新会员信息
+                    //直接调用账户变更事件进行更新页面数据
+                    _DappContractPlugin.getCurrentAccount(function (_from) {
+                        _DappContractPlugin.DappBaseObj._accountsChangedEvent(_from)
+                        _DappContractPlugin._accountsChangedEvent(_from)
+                    })
+                })
             })
             .on('error', function (err) {
                 console.log(err)
-                HandleShowTransactionProcessingLoad && HandleShowTransactionProcessingLoad(false)
-                typeof cb === "function" && cb(false, err)
+                if (err && err.code) {
+                    HandleShowTransactionProcessingLoad && HandleShowTransactionProcessingLoad(false)
+                    typeof cb === "function" && cb(false, err)
+                }
             })
-            .on('confirmation', function (confirmationNumber, receipt) {
-                console.log('confirmation: ' + confirmationNumber);
-            })
-            .on('receipt', function (receipt) {
-                console.log(receipt);
-                //完成刷新会员信息
-                //直接调用账户变更事件进行更新页面数据
-                _DappContractPlugin.getCurrentAccount(function (_from) {
-                    _DappContractPlugin.DappBaseObj._accountsChangedEvent(_from)
-                    _DappContractPlugin._accountsChangedEvent(_from)
-                })
-            });
+            //.on('confirmation', function (confirmationNumber, receipt) {
+            //    console.log('confirmation: ' + confirmationNumber);
+            //})
+            //.on('receipt', function (receipt) {
+            //    console.log(receipt);
+            //    //完成刷新会员信息
+            //    //直接调用账户变更事件进行更新页面数据
+            //    _DappContractPlugin.getCurrentAccount(function (_from) {
+            //        _DappContractPlugin.DappBaseObj._accountsChangedEvent(_from)
+            //        _DappContractPlugin._accountsChangedEvent(_from)
+            //    })
+            //});
     } catch (e) {
         console.log(e)
         HandleShowTransactionProcessingLoad && HandleShowTransactionProcessingLoad(false)
         typeof cb === "function" && cb(false, e.message || e)
     }
 }
-
 
 //-----------------------------------------------------------
 
@@ -684,7 +732,7 @@ function business_checkApprove(amount, taddr, tABI, decimals, isERC777, cb) {
                             checktask.coutnc = 2;
                             Token_approve(function (resulr, rdata) {
                                 if (!resulr) {
-                                    typeof cb === "function" && cb(false, 1001)
+                                    typeof cb === "function" && cb(false, 1001, rdata)
                                     console.log("r1 approve ERR：" + taddr)
                                     checktask.cancel = true;
                                 }
@@ -693,7 +741,7 @@ function business_checkApprove(amount, taddr, tABI, decimals, isERC777, cb) {
                                 checktask.crrc++;
                                 Token_approve(function (resulr, rdata) {
                                     if (!resulr) {
-                                        typeof cb === "function" && cb(false, 1001)
+                                        typeof cb === "function" && cb(false, 1001, rdata)
                                         console.log("r2 approve ERR：" + taddr)
                                         checktask.cancel = true;
                                     }
@@ -710,7 +758,7 @@ function business_checkApprove(amount, taddr, tABI, decimals, isERC777, cb) {
                         } else {
                             Token_approve(function (resulr, rdata) {
                                 if (!resulr) {
-                                    typeof cb === "function" && cb(false, 1001)
+                                    typeof cb === "function" && cb(false, 1001, rdata)
                                     console.log("r2 approve ERR：" + taddr)
                                     checktask.cancel = true;
                                 }
@@ -727,11 +775,11 @@ function business_checkApprove(amount, taddr, tABI, decimals, isERC777, cb) {
                     }
                 } else {
                     console.log("check approve ERR：" + taddr)
-                    typeof cb === "function" && cb(false, 1000)
+                    typeof cb === "function" && cb(false, 1000, "获取授权金额失败")
                 }
             }, null, _ContractAddress, taddr, tABI, decimals)
         } else {
-            typeof cb === "function" && cb(false, 1002)
+            typeof cb === "function" && cb(false, 1002, "余额不足")
         }
     }, null, taddr, tABI, decimals)
 }
@@ -955,7 +1003,7 @@ function business_invest(money, cb,code, rCode) {
 
     function business_invest_b(money, cb, _code, rCode, money_Approve) {
         HandleShowTokenApproveLoad && HandleShowTokenApproveLoad(true);
-        business_checkApprove(money_Approve, _ContractAddress_USDT, _ContractABI_USDT, _ContractDecimals_USDT, false, function (resulr, code) {
+        business_checkApprove(money_Approve, _ContractAddress_USDT, _ContractABI_USDT, _ContractDecimals_USDT, false, function (resulr, code, errmsg) {
             if (resulr) {
                 HandleShowTokenApproveLoad && HandleShowTokenApproveLoad(false);
                 Dapp_invest(money, _code, rCode, cb);
@@ -966,7 +1014,7 @@ function business_invest(money, cb,code, rCode) {
                     //typeof cb === "function" && cb(false, "授权操作金额失败:USDT,code:" + code + ",msg:余额不足");
                     typeof cb === "function" && cb(false, "USDT余额不足");
                 } else {
-                    typeof cb === "function" && cb(false, "授权操作金额失败:USDT,code:" + code);
+                    typeof cb === "function" && cb(false, "授权操作金额失败:USDT,code:" + code + ",msg:" + errmsg);
                 }
             }
         })

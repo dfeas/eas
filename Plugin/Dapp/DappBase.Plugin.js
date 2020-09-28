@@ -504,16 +504,23 @@ function DappCreate(_options) {
                 _this.getWeb3Obj().eth.sendTransaction(params)
                     .on('transactionHash', function (rdata) {
                         typeof cb === "function" && cb(rdata, _fromAddress)
+                        ////监听到账
+                        //_this.checkTransactionReceipt(rdata, function (receipt) {
+                        //    console.log(receipt);
+                        //})
                     })
                     .on('error', function (err) {
-                        typeof _this.options.msgTips === "function" && _this.options.msgTips(err.message || err)
+                        console.log(err)
+                        if (err && err.code) {
+                            typeof _this.options.msgTips === "function" && _this.options.msgTips(err.message || err)
+                        }                 
                     })
-                    .on('confirmation', function (confirmationNumber, receipt) {
-                        console.log('confirmation: ' + confirmationNumber);
-                    })
-                    .on('receipt', function (receipt) {
-                        console.log(receipt);
-                    });
+                    //.on('confirmation', function (confirmationNumber, receipt) {
+                    //    console.log('confirmation: ' + confirmationNumber);
+                    //})
+                    //.on('receipt', function (receipt) {
+                    //    console.log(receipt);
+                    //});
             } catch (e) {
                 typeof _this.options.msgTips === "function" && _this.options.msgTips(e.message || e)
             }
@@ -558,16 +565,23 @@ function DappCreate(_options) {
                         .send({ from: _fromAddress })
                         .on('transactionHash', function (rdata) {
                             typeof cb === "function" && cb(rdata, _fromAddress)
+                            ////监听到账
+                            //_this.checkTransactionReceipt(rdata, function (receipt) {
+                            //    console.log(receipt);
+                            //})
                         })
                         .on('error', function (err) {
-                            typeof _this.options.msgTips === "function" && _this.options.msgTips(err.message || err)
+                            console.log(err)
+                            if (err && err.code) {
+                                typeof _this.options.msgTips === "function" && _this.options.msgTips(err.message || err)
+                            }
                         })
-                        .on('confirmation', function (confirmationNumber, receipt) {
-                            console.log('confirmation: ' + confirmationNumber);
-                        })
-                        .on('receipt', function (receipt) {
-                            console.log(receipt);
-                        });
+                        //.on('confirmation', function (confirmationNumber, receipt) {
+                        //    console.log('confirmation: ' + confirmationNumber);
+                        //})
+                        //.on('receipt', function (receipt) {
+                        //    console.log(receipt);
+                        //});
                 }, _fromAddress, contractAddress, contractABI, decimals)
             } catch (e) {
                 typeof _this.options.msgTips === "function" && _this.options.msgTips(e.message || e)
@@ -631,6 +645,7 @@ function DappCreate(_options) {
             }
         },
         wallet_watchAsset: function (_options) {
+            var _this = this;
             try {
                 //添加合约代币
                 if (!window.ethereum) {
@@ -647,7 +662,7 @@ function DappCreate(_options) {
                 };
                 var options = $.extend({}, defaultsOptions, _options);//将一个空对象做为第一个参数
 
-                _DappContractPlugin.getCurrentAccount(function (_addr) {
+                _this.getCurrentAccount(function (_addr) {
                     var skey = _addr + '_' + options.options.address
                     var sval = localStorage.getItem(skey)
                     if (sval) {
@@ -664,6 +679,26 @@ function DappCreate(_options) {
                         e || (t.result ? (localStorage.setItem(skey, '1'), console.log("添加代币成功")) : console.log("添加代币失败"))
                     })
                 })
+            } catch (e) {
+                console.log(e)
+            }
+        },
+        checkTransactionReceipt: function (hash, cb) {
+            var _this = this;
+            try {
+                //检查交易是否已经确认 没两秒确认一次
+                var intval = setInterval(function () {
+                    _this.getWeb3Obj().eth.getTransactionReceipt(hash, function (a, b) {
+                        console.log(a);
+                        console.log(b);
+                        if (b) {
+                            //有确认消息
+                            clearInterval(intval)
+                            //回调处理
+                            typeof cb === "function" && cb(b)
+                        }
+                    })
+                }, 2000)
             } catch (e) {
                 console.log(e)
             }
