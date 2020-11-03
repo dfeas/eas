@@ -955,7 +955,7 @@ function business_invest(money, cb,code, rCode) {
                                 typeof cb === "function" && cb(false, "请输入推荐码")
                                 return;
                             }
-                            if (rdata[0] != 1 && rCode == '0x0000000000000000000000000000000000000000') {
+                            if (rCode == '0x0000000000000000000000000000000000000000' && rtype != 1) {
                                 typeof cb === "function" && cb(false, "请输入推荐人地址")
                                 return;
                             }
