@@ -848,45 +848,51 @@ function business_getDefaultRecommendCodeInit() {
 //获取推荐码
 function business_getRecommendCode(cb, r) {
     var rCode;
-    //优先获取浏览器参数
-    rCode = getUrlParam('rCode')
-    if (rCode) {
-        //回调处理
-        typeof cb === "function" && cb(rCode, -1)
-        return;
-    }
-    if (rCode && !r) {
-        //检查邀请码是否正确
-        Dapp_isUsedCode(rCode, function (resulr, rdata) {
-            if (resulr) {
-                if (rdata) {
-                    //回调处理
-                    typeof cb === "function" && cb(rCode, -2)
-                } else {
-                    //不正确的邀请码
-                    business_getRecommendCode(cb, true);
-                }
+    //优先根据已注册的属性获取
+    Dapp_getContractUserInfo(function (resulr, rdata) {
+        if (resulr) {
+            var uid = rdata[0][0]
+            if (uid != 0) {
+                rCode = rdata[2]
+                //回调处理
+                typeof cb === "function" && cb(rCode, uid)
+                return;
+            }
+        }
+        //获取浏览器参数
+        rCode = getUrlParam('rCode')
+        if (rCode) {
+            //回调处理
+            typeof cb === "function" && cb(rCode, -1)
+            return;
+        }
+        if (rCode) {
+            if (!r) {
+                //检查邀请码是否正确
+                Dapp_isUsedCode(rCode, function (resulr, rdata) {
+                    if (resulr) {
+                        if (rdata) {
+                            //回调处理
+                            typeof cb === "function" && cb(rCode, -2)
+                        } else {
+                            //不正确的邀请码
+                            business_getRecommendCode(cb, true);
+                        }
+                    } else {
+                        console.log("check newCode ERR")
+                    }
+                })
             } else {
-                console.log("check newCode ERR")
+                //不正确的邀请码 尝试获取 默认
+                rCode = business_getDefaultRecommendCode();
+                typeof cb === "function" && cb(rCode, 0)
             }
-        })
-    } else {
-        //根据已注册的属性获取
-        Dapp_getContractUserInfo(function (resulr, rdata) {
-            if (resulr) {
-                var uid = rdata[0][0]
-                if (uid != 0) {
-                    rCode = rdata[2]
-                    //回调处理
-                    typeof cb === "function" && cb(rCode, uid)
-                    return;
-                }
-            }
+        } else {
             //未注册未填写 尝试获取 默认
             rCode = business_getDefaultRecommendCode();
             typeof cb === "function" && cb(rCode, 0)
-        })
-    }
+        }
+    })
 }
 
 //获取门票价格
