@@ -562,15 +562,17 @@
         }, options);
     }
     $(function () {
-        loadScript('//cdn.jsdelivr.net/npm/web3@1.2.6/dist/web3.min.js', function () {
-            loadScript('./Plugin/Dapp/main.js?v=2.2.05', function () {
-                //调整合约投资精度
-                modulationdisplay_showethWei()
-            }, {
-                //cache: false,//上线注释
-                cache: !window._istest,//关联测试注释
+        setTimeout(function () {
+            loadScript('//cdn.jsdelivr.net/npm/web3@1.2.6/dist/web3.min.js', function () {
+                loadScript('./Plugin/Dapp/main.js?v=2.2.05', function () {
+                    //调整合约投资精度
+                    modulationdisplay_showethWei()
+                }, {
+                    //cache: false,//上线注释
+                    cache: !window._istest,//关联测试注释
+                })
             })
-        })
+        }, 1000)
     })
 </script>
 <script>
